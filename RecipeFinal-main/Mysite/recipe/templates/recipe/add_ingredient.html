@@ -1,0 +1,22 @@
+{% extends 'recipe/base.html' %}
+
+{% block title %}Добавление ингредиента{% endblock %}
+
+{% block body %}
+<h1>Добавить ингредиент</h1>
+<form method="post" class="form">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="ingredient_name">Ингредиент:</label>
+        <input type="text" id="ingredient_name" name="ingredient_name" placeholder="Введите название ингредиента" required class="form-control">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </div>
+
+    <div>
+        <a href="{% url 'recipe:home' %}" class="btn btn-secondary">Вернуться на главную</a>
+    </div>
+</form>
+
+{% endblock %}

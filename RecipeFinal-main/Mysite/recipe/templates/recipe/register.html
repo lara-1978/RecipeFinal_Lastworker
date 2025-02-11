@@ -1,0 +1,28 @@
+{% extends 'recipe/home.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block body %}
+<h2>Регистрация</h2>
+
+<form method="POST">
+    {% csrf_token %}
+<!--    {{ form.as_p }}-->
+     <div class="field">
+    <label>Логин:</label>
+    <input type="text" name="login" />
+  </div>
+  <div class="field">
+    <label>Пароль:</label>
+    <input type="password" name="password" />
+  </div>
+  <div class="field">
+    <label>Подтвердить:</label>
+    <input type="password" name="password" />
+  </div>
+    <div>
+        <button type="submit" class="btn-secondary">Зарегистрироваться</button>
+    </div>
+</form>
+<a href="{% url 'recipe:login' %} "> Уже есть аккаунт? Войти </a>
+{% endblock %}

@@ -1,0 +1,333 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+
+body,htm {
+    font-family: Arial, sans-serif;
+    background-image: url('/static/img/fon2.jpg');
+    background-size: absolute;
+    background-position:center;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Контейнер для основного контента */
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.form {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align; left;
+}
+.form-group {
+    margin-bottom: 20px; /* Отступ между элементами формы */
+}
+
+/* Стили для меток в форме */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Стили для полей ввода */
+input.form-control, textarea.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+/* Контейнер для кнопок */
+.button-container {
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 5px;
+    padding: 2px 5px;
+    top: 20px;
+}
+
+/* Стили для кнопок */
+.button-container a {
+    margin-bottom: 10px;
+}
+
+
+/* Основные стили для страницы */
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.h1 {
+    color: coral;
+    font-family: "Playfair Display", serif;
+    font-weight: normal;
+    font-size: 24px;
+}
+
+.navigation {
+    display: flex;
+    gap: 30px;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+.category {
+    width: 127px;
+    height: 30px;
+    margin-left: auto;
+}
+
+.title {
+    color: #000000;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.content {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 1px;
+}
+
+/* Режим отображения для списка рецептов */
+
+.recipe-list {
+    min-height: 500px; /* Минимальная высота для блока */
+    overflow: hidden; /* Скрытие содержимого, если оно превышает высоту */
+}
+.recipe-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+    min-height: 500px;
+}
+
+/* Стили для отдельных рецептов */
+.recipe-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    font-size: 14px;
+}
+
+.recipe-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    max-width: 250px;
+    margin-bottom: 10px;
+}
+
+.recipe-item h3 {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.recipe-card {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    font-size: 12px;
+}
+
+/* Уменьшаем размер шрифта для ингредиентов */
+.recipe-card h4 {
+    font-size: 10px;
+    color: #2F4F4F;
+}
+
+/* Уменьшаем шрифт для списка ингредиентов */
+.ingredients {
+    margin-top: 14px;
+    font-size: 10px;
+}
+
+.ingredients li {
+    padding: 5px;
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+/* Футер */
+.footer {
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    background-color: #D2691E;
+    color: #fff;
+    font-size: 10px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+/* Стили для страницы рецепта */
+.recipe-detail {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+}
+
+/* Уменьшаем размер изображений в рецепте */
+.recipe-detail img {
+    max-width: 100%;
+    height: auto;
+    width: 150px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+/* Мелкий шрифт для описания рецепта */
+.recipe-detail p {
+    font-size: 10px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Мелкий шрифт для заголовков */
+.recipe-detail h1, .recipe-detail h2, .recipe-detail h3 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Мелкий шрифт для ингредиентов и других блоков */
+.recipe-detail .ingredients, .recipe-detail .steps {
+    font-size: 10px;
+}
+
+.recipe-card {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    font-size: 12px;
+}
+
+.recipe-card h4 {
+    font-size: 8px;
+    color: #2F4F4F;
+}
+
+
+.butt1 {
+     padding-bottom: 18px;
+}
+
+/* объявляем глобальные переменные */
+:root {
+  /* устанавливаем размер для стандартизации элементов */
+  --m: 16px;
+  /* используемые цвета */
+  --red: #FF6565;
+  --pink: #FF64F9;
+  --purple: #6B5FFF;
+  --blue: #4D8AFF;
+  --green: #5BFF89;
+  --yellow: #FFEE55;
+  --orange: #FF6D1B;
+
+}
+
+/* кнопка */
+.butt1 {
+  /* задаём границу */
+  border: calc(0.08 * var(--m)) solid transparent;
+  /* относительное позиционирование элементов */
+  position: relative;
+  /* цвет текста */
+  color: #F3F3F3;
+  /* шрифт */
+  font-family: 'Space Grotesk';
+  /* размер шрифта */
+  font-size: 12px;
+
+  border-radius: calc(0.7 * var(--m));
+  padding: calc(0.5 * var(--m)) calc(1 * var(--m));
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  /* делаем фоновый градиент по границе кнопки */
+  background:linear-gradient(#121213, #121213), linear-gradient(#121213 50%, rgba(18, 18, 19, 0.6) 80%, rgba(18, 18, 19, 0)), linear-gradient(90deg, var(--orange), var(--yellow), var(--green), var(--blue), var(--purple), var(--pink), var(--red));
+  background-origin: border-box;
+  background-clip: padding-box, border-box, border-box;
+  background-size: 200%;
+  animation: animate 2s infinite linear;
+}
+
+/* псевдоэлемент, который отвечает за фоновую подсветку */
+.butt1::before {
+  content: '';
+  /* делаем фоновый градиент под кнопкой */
+  background: linear-gradient(90deg, var(--orange), var(--yellow), var(--green), var(--blue), var(--purple), var(--pink), var(--red));
+  /* высота и ширина градиента */
+  height: 30%;
+  width: 60%;
+  position: absolute;
+  bottom: -20%;
+  z-index: -5;
+  background-size: 200%;
+  /* запускаем анимацию */
+  animation: animate 2s infinite linear;
+  filter: blur(calc(1 * var(--m)));
+}
+
+/* действия при наведении мыши */
+.butt1:hover, butt1:hover::before {
+  animation: animate 0.5s infinite linear;
+}
+
+/* правила анимации */
+@keyframes animate {
+  0% {background-position: 0}
+  100% {background-position: 200%}
+}
+
+

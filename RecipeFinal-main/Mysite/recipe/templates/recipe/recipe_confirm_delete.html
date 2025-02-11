@@ -1,0 +1,23 @@
+{% extends 'recipe/base.html' %}
+
+{% block title %}
+    Подтверждение архивирования {{ object.name }}
+{% endblock %}
+
+{% block body %}
+    <h1>Вы уверены,что хотите отправить в архив рецепт {{object.name}}?</h1>
+
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-danger">Да,уверен.</button>
+         <br>
+            <div>
+                <a href="{% url 'recipe:home' %}">Вернуться на главную</a>
+            </div>
+            <br>
+        </form>
+    </div>
+
+{% endblock %}

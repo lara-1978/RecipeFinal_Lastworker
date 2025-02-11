@@ -1,0 +1,25 @@
+{% extends 'recipe/base.html' %}
+
+{% block title %}
+Редактирование
+{% endblock %}
+
+<body>
+  {% block body %}
+
+<h1>Редактировать рецепт</h1>
+<form method="post" enctype="multipart/form-data" class="form">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+  </div>
+
+  <div>
+      <a href="{% url 'recipe:home' %}" class="btn btn-secondary">Вернуться на главную</a>
+  </div>
+</form>
+
+
+{% endblock %}
+</body>
