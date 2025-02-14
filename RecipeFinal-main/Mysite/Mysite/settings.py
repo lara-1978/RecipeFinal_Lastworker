@@ -9,9 +9,10 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from os import getenv
 from pathlib import Path
 import warnings
+import logging.config
 from django.urls import reverse_lazy
 
 warnings.filterwarnings(
@@ -23,19 +24,38 @@ warnings.filterwarnings(
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+DATABASE_DIR = BASE_DIR / "database"
+DATABASE_DIR.mkdir(exist_ok=True)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6*1aqavcu_s189lzgq-dcs!d=9a5$olxy*y(t+2$b%yfyf-iqb'
+SECRET_KEY = getenv(
+    "DJANGO_SECRET_KEY",
+    'django-insecure-6*1aqavcu_s189lzgq-dcs!d=9a5$olxy*y(t+2$b%yfyf-iqb',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv("DJANGO_DEBUG", "0") == "1"
 
-ALLOWED_HOSTS = []
 
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "0.0.0.0",
+] + getenv("DJANGO_ALLOWED_HOSTS", "").split(",")
+INTERNAL_IPS = [
+    "127.0.0.1",
+    "0.0.0.0",
+]
+if DEBUG:
+    import socket
+    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+    INTERNAL_IPS.append("10.0.2.2")
+    INTERNAL_IPS.extend(
+        [ip[:ip.rfind(".")] + ".1" for ip in ips]
+    )
 
 # Application definition
 
@@ -47,6 +67,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'recipe.apps.RecipeConfig',
+
+    'debug_toolbar',
     'rest_framework',
     'myapiapp.apps.MyapiappConfig',
 ]
@@ -59,6 +81,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'Mysite.urls'
@@ -88,7 +111,7 @@ WSGI_APPLICATION = 'Mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': DATABASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -133,7 +156,7 @@ import os
 MEDIA_URL = '/media/'
 
 # Путь на сервере для хранения медиафайлов
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR,)
 
 # Настройки Django
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -156,4 +179,30 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
 }
+
+LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
+logging.config.dictConfig({
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console": {
+            "format": "%(asctime)s %(levelname)s [ %(name)s %(lineno)s] %(module)s %(messages)s",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatters": "console",
+        },
+    },
+    "loggers": {
+        "": {
+            "level": LOGLEVEL,
+            "handlers": {
+                "console",
+            },
+        },
+    },
+})
+
 

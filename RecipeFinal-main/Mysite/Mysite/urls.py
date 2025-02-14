@@ -24,6 +24,18 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('recipe/', include('recipe.urls')),
     path('api/', include('myapiapp.urls')),
+
 ]
+
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns.extend(
+        static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    )
+    urlpatterns.extend(
+        static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    )
+
+    urlpatterns.append(
+        path("__debug__/", include("debug_toolbar.urls")),
+    )
+
