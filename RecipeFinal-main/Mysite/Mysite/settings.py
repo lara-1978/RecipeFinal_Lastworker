@@ -182,27 +182,24 @@ REST_FRAMEWORK = {
 
 LOGLEVEL = getenv("DJANGO_LOGLEVEL", "info").upper()
 logging.config.dictConfig({
-    "version": 1,
+ "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
         "console": {
-            "format": "%(asctime)s %(levelname)s [ %(name)s %(lineno)s] %(module)s %(messages)s",
+            "format": "%(asctime)s %(levelname)s [%(name)s %(lineno)s] %(module)s %(message)s",
         },
     },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
-            "formatters": "console",
+            "formatter": "console",  # Используется корректный параметр 'formatter'
         },
     },
     "loggers": {
-        "": {
-            "level": LOGLEVEL,
-            "handlers": {
-                "console",
-            },
+        "django": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": True,
         },
     },
 })
-
-
